@@ -7,7 +7,7 @@ import Pagination from '@sections/Pagination'
 export default function BusinessList({ response }: any) {
 
     const businessesArr = response.data
-    const businesses = businessesArr.businesses
+    const businesses = businessesArr?.businesses
 
     const [currentPage, setCurrentPage] = useState(1)
     const [postsPerPage, setPostsPerPage] = useState(0)
@@ -23,7 +23,7 @@ export default function BusinessList({ response }: any) {
 
     return (
         <>
-            <div className='text-black flex flex-wrap justify-center'>
+            <div className='text-black flex flex-wrap justify-center p-4'>
                 {
                     // eslint-disable-next-line @typescript-eslint/no-explicit-any
                     currentPosts?.map((business: any, index: number) =>
