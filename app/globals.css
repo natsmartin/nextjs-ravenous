@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #b87400ec;
+  --foreground: #000000;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -24,4 +24,17 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+}
+
+.active {
+  background-color: rgba(255, 210, 88, 0.95);
+  color: black
+}
+
+.positive {
+  color: green;
+}
+
+.negative {
+  color: red;
 }
