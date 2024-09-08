@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  --background: #b87400ec;
+  --background: #c67e01;
   --foreground: #000000;
 }
 
@@ -32,10 +32,7 @@ body {
 }
 
 .background-image {
-  background: url('search-background.webp');
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
+  z-index: -1;
 }
 
 .positive {

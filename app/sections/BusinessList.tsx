@@ -23,7 +23,7 @@ export default function BusinessList({ response }: any) {
 
     return (
         <>
-            <div className='text-black flex flex-wrap justify-center'>
+            <div className='text-black flex flex-wrap justify-center my-4'>
                 {
                     // eslint-disable-next-line @typescript-eslint/no-explicit-any
                     currentPosts?.map((business: any, index: number) =>

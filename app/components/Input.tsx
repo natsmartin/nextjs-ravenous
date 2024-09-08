@@ -9,8 +9,8 @@ interface InputProps {
 export default function Input({id, name, placeholder}: InputProps) {
     return (
         <input id={id} type="text" placeholder={placeholder} name={name} required
-            className="text-black px-2 m-2 h-5 text-xs rounded-md w-[30vw]
-                md:text-base md:h-auto md:m-4 md:w-[25vw]">
+            className="text-black px-2 m-2 h-5 text-xs rounded-md w-[40vw]
+                md:text-base md:h-auto md:m-4 md:w-[30vw]">
         </input>
     )
 }

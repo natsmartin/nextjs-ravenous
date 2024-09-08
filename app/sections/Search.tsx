@@ -6,6 +6,8 @@ import Input from "@components/Input";
 import BusinessList from '@sections/BusinessList';
 import { handleSubmit } from '@app/utils/actions/fetch-data';
 import { useState } from 'react';
+import Image from 'next/image';
+import background from '../search-background.webp'
 
 const filters = [
     {
@@ -43,7 +45,7 @@ export default function Search() {
 
     return (
         <>
-            <div className={`${modal} fixed bg-[#0006] z-10 top-0 left-1/2
+            <div className={`${modal} fixed bg-[#0006] z-20 top-0 left-1/2
                     -translate-x-1/2 overflow-auto h-full w-full`}>
                 <div className='p-4 m-4 bg-white w-auto text-center md:w-2/6 md:translate-x-full'>
                     <span onClick={() => setModal('hidden')}
@@ -51,9 +53,15 @@ export default function Search() {
                     <p className='m-6 text-black'>Please fill out all the fields.</p>
                 </div>
             </div>
-            <div className="bg-cyan-700 pb-2 background-image">
-                <form action={formAction}>
-                    <div className="flex justify-center py-2 bg-[#0006]">
+            <div className="bg-cyan-700 pb-2 z-10 relative">
+                <Image className='background-image'
+                    src={background} alt={'Ravenous background image'}
+                    layout='fill'
+                    objectFit='cover'
+                    objectPosition='center'
+                    priority={true} />
+                <form action={formAction} >
+                    <div className="flex justify-center py-2 bg-[#000000b0]">
                         {
                             filters.map(filter =>
                                 <Button key={filter.value} label={filter.label} onClick={handleSort}
@@ -67,8 +75,8 @@ export default function Search() {
                         <Input id="location-input" placeholder="Where?" name="location" />
                     </div>
                     <div className="flex justify-center m-2">
-                        <button type="submit" className="rounded-xl bg-amber-600 text-xs text-white font-bold px-8 py-2 
-                        shadow-gray-900 shadow-lg md:text-base hover:scale-105 hover:bg-amber-100 hover:text-slate-500"
+                        <button type="submit" className="rounded-xl bg-cyan-700 text-xs text-white font-bold px-8 py-2 
+                        shadow-gray-900 shadow-lg md:text-base hover:scale-105 hover:bg-cyan-600"
                             onClick={handleSearch}>
                             Let&apos;s Go
                         </button>
