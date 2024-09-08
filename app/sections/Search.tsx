@@ -53,14 +53,14 @@ export default function Search() {
                     <p className='m-6 text-black'>Please fill out all the fields.</p>
                 </div>
             </div>
-            <div className="bg-cyan-700 pb-2 z-10 relative h-[75vh]">
+            <div className="bg-cyan-700 pb-2 z-10 relative h-[30vh]">
                 <Image className='background-image'
                     src={background} alt={'Ravenous background image'}
                     layout='fill'
                     objectFit='cover'
                     objectPosition='center'
                     priority={true} />
-                <form action={formAction} >
+                <form action={formAction} className='pt-16' >
                     <div className="flex justify-center py-2 bg-[#000000b0]">
                         {
                             filters.map(filter =>
