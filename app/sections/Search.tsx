@@ -5,7 +5,7 @@ import Button from "@components/Filter";
 import Input from "@components/Input";
 import BusinessList from '@sections/BusinessList';
 import { handleSubmit } from '@app/utils/actions/fetch-data';
-import { useState, Suspense } from 'react';
+import { useState } from 'react';
 
 const filters = [
     {
@@ -33,9 +33,9 @@ export default function Search() {
     }
 
     const handleSearch = () => {
-        const termValue = (document.getElementById('term-input') as HTMLInputElement).value 
-        const locationValue = (document.getElementById('term-input') as HTMLInputElement).value 
-        
+        const termValue = (document.getElementById('term-input') as HTMLInputElement).value
+        const locationValue = (document.getElementById('term-input') as HTMLInputElement).value
+
         if (!termValue || !locationValue) {
             setModal('block')
         }
@@ -51,9 +51,9 @@ export default function Search() {
                     <p className='m-6 text-black'>Please fill out all the fields.</p>
                 </div>
             </div>
-            <div className="bg-cyan-700 p-4">
+            <div className="bg-cyan-700 pb-2 background-image">
                 <form action={formAction}>
-                    <div className="flex justify-center mb-4">
+                    <div className="flex justify-center py-2 bg-[#0006]">
                         {
                             filters.map(filter =>
                                 <Button key={filter.value} label={filter.label} onClick={handleSort}
@@ -75,9 +75,7 @@ export default function Search() {
                     </div>
                 </form>
             </div>
-            <Suspense fallback={<p>Loading...</p>}>
-                <BusinessList response={formState} />
-            </Suspense>
+            <BusinessList response={formState} />
         </>
     )
 }

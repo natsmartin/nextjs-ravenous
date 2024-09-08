@@ -9,7 +9,7 @@ const options = {
     }
 }
 
-export default async function fetchBusinesses({ term, location, sortby = 'best_match' }
+export async function fetchBusinesses({ term, location, sortby = 'best_match' }
     : { term: string, location: string, sortby: string }) {
         
     const searchParams = `search?location=${location}&term=${term}&sort_by=${sortby}&limit=50`
@@ -17,8 +17,8 @@ export default async function fetchBusinesses({ term, location, sortby = 'best_m
     return response.json()
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export async function handleSubmit(prevState: any, formData: FormData) {
+
+export async function handleSubmit(prevState: object | undefined, formData: FormData) {
     const fields = {
         term: String(formData.get('term')),
         location: String(formData.get('location')),

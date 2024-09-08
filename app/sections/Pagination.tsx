@@ -16,7 +16,7 @@ export default function Pagination({ totalPosts, postsPerPage, setCurrentPage, c
     }
 
     return (
-        <div className='flex flex-nowrap justify-center items-center h-24 text-black font-bold'>
+        <div className='flex flex-nowrap justify-center items-center text-black font-bold'>
             {
                 pages.map((page, index) =>
                     <button key={index} onClick={() => setCurrentPage(page)}
