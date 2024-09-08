@@ -53,7 +53,7 @@ export default function Search() {
                     <p className='m-6 text-black'>Please fill out all the fields.</p>
                 </div>
             </div>
-            <div className="bg-cyan-700 pb-2 z-10 relative">
+            <div className="bg-cyan-700 pb-2 z-10 relative h-[75vh]">
                 <Image className='background-image'
                     src={background} alt={'Ravenous background image'}
                     layout='fill'
