@@ -18,7 +18,8 @@ export async function fetchBusinesses({ term, location, sortby = 'best_match' }
 }
 
 
-export async function handleSubmit(prevState: object | undefined, formData: FormData) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function handleSubmit(prevState: any, formData: FormData) {
     const fields = {
         term: String(formData.get('term')),
         location: String(formData.get('location')),
@@ -27,11 +28,11 @@ export async function handleSubmit(prevState: object | undefined, formData: Form
 
 
     if (Object.values(fields)) {
-        const response = await fetchBusinesses(fields)
+        // const response = await fetchBusinesses(fields)
 
         return {
             ...prevState,
-            data: response
+            data: fields
         }
     }
 }

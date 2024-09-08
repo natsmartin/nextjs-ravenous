@@ -5,7 +5,7 @@ import Image from 'next/image'
 export default function Business({ business }: any) {
     return (
         <div className='flex flex-col justify-center items-center rounded-xl shadow-gray-900 shadow-lg h-auto p-2 m-4 bg-cyan-700'>
-            <div className='flex justify-center w-[50%] h-[50%] mt-4'>
+            <div className='flex justify-center w-[100%] h-[50%] mt-4'>
                 <Image
                     src={business.image_url}
                     alt={business.name}

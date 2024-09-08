@@ -4,17 +4,16 @@ import Business from '@sections/Business'
 import Pagination from '@sections/Pagination'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default function BusinessList({ response }: any) {
+export default async function BusinessList({ businessList }: any) {
 
-    const businessesArr = response.data
-    const businesses = businessesArr?.businesses
+    const businesses = businessList?.businesses
 
     const [currentPage, setCurrentPage] = useState(1)
     const [postsPerPage, setPostsPerPage] = useState(0)
 
     useEffect(() => {
         setPostsPerPage(10)
-    }, [businessesArr])
+    }, [businessList])
 
 
     const lastPostIndex = currentPage * postsPerPage

@@ -4,10 +4,11 @@ import { useFormState } from 'react-dom';
 import Button from "@components/Filter";
 import Input from "@components/Input";
 import BusinessList from '@sections/BusinessList';
-import { handleSubmit } from '@app/utils/actions/fetch-data';
-import { useState } from 'react';
+import { handleSubmit, fetchBusinesses } from '@app/utils/actions/fetch-data';
+import { useState, useEffect, Suspense } from 'react';
 import Image from 'next/image';
 import background from '../search-background.webp'
+import Loading from '@app/loading'
 
 const filters = [
     {
@@ -27,6 +28,20 @@ export default function Search() {
 
     const [formState, formAction] = useFormState(handleSubmit, { data: '' })
     const [modal, setModal] = useState('hidden')
+    const [businessList, setBusinessList] = useState()
+
+    useEffect(() => {
+        const params = formState.data
+        async function fetchData() {
+            const response = await fetchBusinesses(params)
+            setBusinessList(response)
+        }
+
+        if (Object.values(params)) {
+            fetchData()
+        }
+
+    }, [formState.data])
 
     const handleSort = (e: React.MouseEvent<HTMLElement>) => {
         const sort = document.getElementById('hidden-input-sort') as HTMLInputElement
@@ -83,7 +98,9 @@ export default function Search() {
                     </div>
                 </form>
             </div>
-            <BusinessList response={formState} />
+            <Suspense fallback={<Loading />} >
+                <BusinessList businessList={businessList} />
+            </Suspense>
         </>
     )
 }
