@@ -1,18 +1,7 @@
 import type { Metadata } from "next";
-// import localFont from "next/font/local";
 import "./globals.css";
 import { roboto } from "./fonts/fonts";
-
-// const geistSans = localFont({
-//   src: "./fonts/GeistVF.woff",
-//   variable: "--font-geist-sans",
-//   weight: "100 900",
-// });
-// const geistMono = localFont({
-//   src: "./fonts/GeistMonoVF.woff",
-//   variable: "--font-geist-mono",
-//   weight: "100 900",
-// });
+import { Analytics } from "@vercel/analytics/react"
 
 export const metadata: Metadata = {
   title: "Ravenous App",
@@ -30,6 +19,7 @@ export default function RootLayout({
         className={`${roboto.className} antialiased`}
       >
         {children}
+        <Analytics />
       </body>
     </html>
   );
