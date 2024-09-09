@@ -1,13 +1,11 @@
 'use client'
 
-// import { useFormState } from 'react-dom';
+
 import Button from "@components/Filter";
 import Input from "@components/Input";
 import BusinessList from '@sections/BusinessList';
-// import { handleSubmit } from '@app/utils/actions/fetch-data';
-// import { useState } from 'react';
 import Image from 'next/image';
-import { Dispatch, SetStateAction } from "react";
+
 
 const filters = [
     {
@@ -24,11 +22,8 @@ const filters = [
     }]
 
 
-export default function Search({ formState, formAction, modal, setModal }
-    : { formState: object,
-        formAction: (payload: FormData) => void,
-        modal: string,
-        setModal: Dispatch<SetStateAction<string>> }) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export default function Search({ formState, formAction, modal, setModal }: any ) {
 
 
     const handleSort = (e: React.MouseEvent<HTMLElement>) => {
