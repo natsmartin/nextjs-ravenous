@@ -76,7 +76,7 @@ export default function Search({ formState, formAction, modal, setModal }
                         <Input id="location-input" placeholder="Where?" name="location" />
                     </div>
                     <div className="flex justify-center m-2">
-                        <button type="submit" className="rounded-xl bg-cyan-700 text-xs text-white font-bold px-8 py-2 
+                        <button type="submit" className="rounded-xl bg-cyan-700 text-xs text-white font-semibold md:font-bold px-8 py-2 
                         shadow-gray-900 shadow-lg md:text-base hover:scale-105 hover:bg-cyan-600 button-clamp"
                             onClick={handleSearch}>
                             Let&apos;s Go

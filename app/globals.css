@@ -71,8 +71,8 @@ body {
 }
 
 .button-clamp {
-  width: clamp(15%, 3vw, 100%);
+  width: clamp(10%, 12vw, 100%);
   height: clamp(10%, 3vh, 100%);
   font-size: clamp(.5rem, 2vw, 1rem);
-  padding: clamp(.25rem, 1vw, .5rem)
+  padding: clamp(.25rem, 1vw, .5rem);
 }
