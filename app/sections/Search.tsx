@@ -7,7 +7,6 @@ import BusinessList from '@sections/BusinessList';
 // import { handleSubmit } from '@app/utils/actions/fetch-data';
 // import { useState } from 'react';
 import Image from 'next/image';
-import background from '../search-background.webp'
 import { Dispatch, SetStateAction } from "react";
 
 const filters = [
@@ -59,7 +58,8 @@ export default function Search({ formState, formAction, modal, setModal }
             </div>
             <div className="bg-cyan-700 z-10 relative md:h-[30vh] flex flex-col justify-center">
                 <Image className='background-image'
-                    src={background} alt={'Ravenous background image'}
+                    fill
+                    src={'/search-background.webp'} alt={'Ravenous background image'}
                     priority={true} />
                 <form action={formAction} >
                     <div className="flex justify-center py-2 bg-[#000000b0]">
