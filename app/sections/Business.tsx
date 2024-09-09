@@ -1,11 +1,31 @@
 import React from 'react'
 import Image from 'next/image'
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default function Business({ business }: any) {
+interface BusinessProps {
+    categories: [{ alias: string, title: string }],
+    display_phone: string,
+    id: string,
+    image_url: string,
+    location:
+    {
+        address1: string,
+        address2: string,
+        city: string,
+        country: string,
+        state: string,
+        zip_code: string
+    },
+    name: string,
+    phone: string,
+    rating: number,
+    review_count: number,
+    url: string
+}
+
+export default function Business({ business }: { business: BusinessProps }) {
     return (
-        <div className='flex flex-col justify-center items-center rounded-xl shadow-gray-900 shadow-lg h-auto p-2 m-4 bg-cyan-700'>
-            <div className='flex justify-center w-[100%] h-[50%] mt-4'>
+        <div className='flex flex-col justify-center rounded-xl shadow-gray-900 shadow-lg p-2 m-4 bg-cyan-700 card-clamp'>
+            <div className='flex justify-center'>
                 <Image
                     src={business.image_url}
                     alt={business.name}
@@ -13,19 +33,20 @@ export default function Business({ business }: any) {
                     height={250}
                     priority={true} />
             </div>
-
-            <p className='text-center text-white font-bold m-4 text-lg md:text-xl'>{business.name}</p>
-            <div className='flex justify-around text-white px-2 md:px-8 mb-4 text-xs md:[&>*]:text-base'>
-                <div className='text-wrap'>
-                    <p className={`${business.location.address1.length < 30 ? 'md:text-base' : 'md:text-sm'}
+            <div className='flex justify-center'>
+                <p className='text-white font-bold my-2 title-clamp'>{business.name}</p>
+            </div>
+            <div className='flex justify-around text-white px-2 md:px-8 mb-4 text-clamp'>
+                <div className='text-wrap w-[50%]'>
+                    <p className={`${business.location.address1.length < 15 ? 'md:text-base' : 'md:text-sm'}
                     mr-2 text-xs`}>{business.location.address1}</p>
-                    <p className={`${business.location.address2?.length < 30 ? 'md:text-base' : 'md:text-sm'}
+                    <p className={`${business.location.address2?.length < 15 ? 'md:text-base' : 'md:text-sm'}
                     mr-2 text-xs`}>{business.location.address2}</p>
                     <p>{business.location.city}</p>
                     <p>{business.location.state + ' ' + business.location.zip_code}</p>
                 </div>
                 <div className='font-bold text-yellow-500 text-right mb-auto'>
-                    <p className={`${Number(business.rating) >= 3 ? 'positive' : 'negative'} bg-white rounded-sm text-center`}>
+                    <p className={`${Number(business.rating) >= 3 ? 'positive' : 'negative'} bg-white rounded-sm text-center mb-1`}>
                         {business.rating} ⭐</p>
                     <p className='pt-1'>{business.categories[0]?.title.toUpperCase()}</p>
                     <p className='text-[9px] md:text-base' >{business.review_count + ' reviews'}</p>

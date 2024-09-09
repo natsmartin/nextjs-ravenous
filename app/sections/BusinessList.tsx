@@ -1,10 +1,33 @@
 
 import { useState, useEffect } from 'react'
-import Business from '@sections/Business'
+// import BusinessCard from '@sections/Business'
 import Pagination from '@sections/Pagination'
+import dynamic from 'next/dynamic'
+import Loading from '@app/loading'
+import { fetchBusinesses } from '@app/utils/actions/fetch-data'
+const BusinessCard = dynamic(() => import('@sections/Business'),
+    { loading: () => <Loading /> })
 
+
+    
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default async function BusinessList({ businessList }: any) {
+export default function BusinessList({ formState }: any) {
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const [businessList, setBusinessList] = useState<any>()
+
+    useEffect(() => {
+        const params = formState.data
+        async function fetchData() {
+            const response = await fetchBusinesses(params)
+            setBusinessList(response)
+        }
+
+        if (Object.values(params)) {
+            fetchData()
+        }
+
+    }, [formState.data])
 
     const businesses = businessList?.businesses
 
@@ -26,7 +49,7 @@ export default async function BusinessList({ businessList }: any) {
                 {
                     // eslint-disable-next-line @typescript-eslint/no-explicit-any
                     currentPosts?.map((business: any, index: number) =>
-                        <Business key={business.name + index} business={business} />)
+                        <BusinessCard key={index} business={business} />)
                 }
             </div>
             <Pagination

@@ -33,6 +33,11 @@ body {
 
 .background-image {
   z-index: -1;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
 }
 
 .positive {
@@ -41,4 +46,33 @@ body {
 
 .negative {
   color: rgb(223, 0, 0);
+}
+
+.header-clamp {
+  font-size: clamp(2.25rem, 7vw, 3.75rem);
+}
+
+.text-clamp {
+  font-size: clamp(.75rem, 1.75vw, .875rem);
+}
+
+.address.clamp {
+  font-size: clamp(.75rem, 1vw, 0.5rem);
+}
+
+.title-clamp {
+  font-size: clamp(1.125rem, 3vw, 1.25rem);
+  text-align: center;
+}
+
+.card-clamp {
+  width: clamp(300px, 3vw, 500px);
+  height: clamp(75%, 3vh, 100%);
+}
+
+.button-clamp {
+  width: clamp(20%, 3vw, 100%);
+  height: clamp(10%, 3vh, 100%);
+  font-size: clamp(.75rem, 1.75vw, 1rem);
+  padding: clamp(.25rem, 3vw, .5rem)
 }

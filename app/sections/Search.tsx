@@ -1,14 +1,14 @@
 'use client'
 
-import { useFormState } from 'react-dom';
+// import { useFormState } from 'react-dom';
 import Button from "@components/Filter";
 import Input from "@components/Input";
 import BusinessList from '@sections/BusinessList';
-import { handleSubmit, fetchBusinesses } from '@app/utils/actions/fetch-data';
-import { useState, useEffect, Suspense } from 'react';
+// import { handleSubmit } from '@app/utils/actions/fetch-data';
+// import { useState } from 'react';
 import Image from 'next/image';
 import background from '../search-background.webp'
-import Loading from '@app/loading'
+import { Dispatch, SetStateAction } from "react";
 
 const filters = [
     {
@@ -24,24 +24,13 @@ const filters = [
         value: 'review_count'
     }]
 
-export default function Search() {
 
-    const [formState, formAction] = useFormState(handleSubmit, { data: '' })
-    const [modal, setModal] = useState('hidden')
-    const [businessList, setBusinessList] = useState()
+export default function Search({ formState, formAction, modal, setModal }
+    : { formState: object,
+        formAction: (payload: FormData) => void,
+        modal: string,
+        setModal: Dispatch<SetStateAction<string>> }) {
 
-    useEffect(() => {
-        const params = formState.data
-        async function fetchData() {
-            const response = await fetchBusinesses(params)
-            setBusinessList(response)
-        }
-
-        if (Object.values(params)) {
-            fetchData()
-        }
-
-    }, [formState.data])
 
     const handleSort = (e: React.MouseEvent<HTMLElement>) => {
         const sort = document.getElementById('hidden-input-sort') as HTMLInputElement
@@ -68,14 +57,11 @@ export default function Search() {
                     <p className='m-6 text-black'>Please fill out all the fields.</p>
                 </div>
             </div>
-            <div className="bg-cyan-700 pb-2 z-10 relative h-[30vh]">
+            <div className="bg-cyan-700 z-10 relative md:h-[30vh] flex flex-col justify-center">
                 <Image className='background-image'
                     src={background} alt={'Ravenous background image'}
-                    layout='fill'
-                    objectFit='cover'
-                    objectPosition='center'
                     priority={true} />
-                <form action={formAction} className='pt-16' >
+                <form action={formAction} >
                     <div className="flex justify-center py-2 bg-[#000000b0]">
                         {
                             filters.map(filter =>
@@ -91,16 +77,14 @@ export default function Search() {
                     </div>
                     <div className="flex justify-center m-2">
                         <button type="submit" className="rounded-xl bg-cyan-700 text-xs text-white font-bold px-8 py-2 
-                        shadow-gray-900 shadow-lg md:text-base hover:scale-105 hover:bg-cyan-600"
+                        shadow-gray-900 shadow-lg md:text-base hover:scale-105 hover:bg-cyan-600 button-clamp"
                             onClick={handleSearch}>
                             Let&apos;s Go
                         </button>
                     </div>
                 </form>
             </div>
-            <Suspense fallback={<Loading />} >
-                <BusinessList businessList={businessList} />
-            </Suspense>
+            <BusinessList formState={formState} />
         </>
     )
 }
