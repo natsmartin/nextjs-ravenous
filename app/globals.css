@@ -37,6 +37,11 @@ body {
   object-position: center;
 }
 
+.business-image {
+  width:auto;
+  height: auto;
+}
+
 .positive {
   color: green;
 }

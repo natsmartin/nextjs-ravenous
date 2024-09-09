@@ -11,7 +11,7 @@ const BusinessCard = dynamic(() => import('@sections/Business'),
 
     
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default function BusinessList({ formState }: any) {
+export default async function BusinessList({ formState }: any) {
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const [businessList, setBusinessList] = useState<any>()
