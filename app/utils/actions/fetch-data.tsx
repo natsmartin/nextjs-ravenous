@@ -1,16 +1,17 @@
 'use server'
 
-const baseUrl = 'https://api.yelp.com'
-const options = {
-    method: 'GET',
-    headers: {
-        accept: 'application/json',
-        Authorization: `Bearer ${process.env.API_KEY}`
-    }
-}
 
 export const fetchBusinesses = async ({ term, location, sortby = 'best_match' }
     : { term: string, location: string, sortby: string }) => {
+
+    const baseUrl = 'https://api.yelp.com'
+    const options = {
+        method: 'GET',
+        headers: {
+            accept: 'application/json',
+            Authorization: `Bearer ${process.env.API_KEY}`
+        }
+    }
 
     const searchParams = `search?location=${location}&term=${term}&sort_by=${sortby}&limit=50`
     const response = await fetch(`${baseUrl}/v3/businesses/${searchParams}`, options)
