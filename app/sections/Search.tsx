@@ -6,8 +6,6 @@ import Input from "@components/Input";
 import BusinessList from '@sections/BusinessList';
 import Image from 'next/image';
 
-import Loading from '@app/loading'
-import { Suspense } from "react";
 
 import { useFormState } from "react-dom";
 import { useState } from "react";
@@ -96,15 +94,15 @@ export default function Search() {
                     </div>
                 </form>
             </div>
-            <Suspense fallback={<Loading />} >
-                <BusinessList formState={formState}
-                    businessList={businessList}
-                    setBusinessList={setBusinessList}
-                    currentPage={currentPage}
-                    setCurrentPage={setCurrentPage}
-                    postsPerPage={postsPerPage}
-                    setPostsPerPage={setPostsPerPage} />
-            </Suspense>
+
+            <BusinessList formState={formState}
+                businessList={businessList}
+                setBusinessList={setBusinessList}
+                currentPage={currentPage}
+                setCurrentPage={setCurrentPage}
+                postsPerPage={postsPerPage}
+                setPostsPerPage={setPostsPerPage} />
+
         </>
     )
 }

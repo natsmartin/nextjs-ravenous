@@ -9,7 +9,7 @@ import { fetchBusinesses } from '@utils/actions/fetch-data'
 
 
 
-export default async function BusinessList({
+export default function BusinessList({
     formState, businessList, setBusinessList,
     currentPage, setCurrentPage, 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
