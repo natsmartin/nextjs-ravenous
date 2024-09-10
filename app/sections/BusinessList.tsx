@@ -9,17 +9,15 @@ import { fetchBusinesses } from '@utils/actions/fetch-data'
 
 
 
-export default function BusinessList({
+export default async function BusinessList({
     formState, businessList, setBusinessList,
-    currentPage, setCurrentPage, 
+    currentPage, setCurrentPage,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     postsPerPage, setPostsPerPage }: any) {
 
 
-    const params = formState.data
-
-
     useEffect(() => {
+        const params = formState.data
         async function fetchData() {
             const response = await fetchBusinesses(params)
             setBusinessList(response)
@@ -33,7 +31,7 @@ export default function BusinessList({
             fetchData()
         }
 
-    }, [formState.data, params, setBusinessList])
+    }, [formState.data, setBusinessList])
 
     const businesses = businessList?.businesses
 

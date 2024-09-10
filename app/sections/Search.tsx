@@ -5,10 +5,11 @@ import Button from "@components/Filter";
 import Input from "@components/Input";
 import BusinessList from '@sections/BusinessList';
 import Image from 'next/image';
+import Loading from '@app/loading'
 
 
 import { useFormState } from "react-dom";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { handleSubmit } from "@utils/actions/fetch-data";
 
 
@@ -34,8 +35,7 @@ export default function Search() {
     const [formState, formAction] = useFormState(handleSubmit, { data: '' })
     const [modal, setModal] = useState('hidden')
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const [businessList, setBusinessList] = useState<any>()
+    const [businessList, setBusinessList] = useState({ businesses: [] })
 
     const [currentPage, setCurrentPage] = useState(1)
     const [postsPerPage, setPostsPerPage] = useState(0)
@@ -94,14 +94,15 @@ export default function Search() {
                     </div>
                 </form>
             </div>
-
-            <BusinessList formState={formState}
-                businessList={businessList}
-                setBusinessList={setBusinessList}
-                currentPage={currentPage}
-                setCurrentPage={setCurrentPage}
-                postsPerPage={postsPerPage}
-                setPostsPerPage={setPostsPerPage} />
+            <Suspense fallback={<Loading />}>
+                <BusinessList formState={formState}
+                    businessList={businessList}
+                    setBusinessList={setBusinessList}
+                    currentPage={currentPage}
+                    setCurrentPage={setCurrentPage}
+                    postsPerPage={postsPerPage}
+                    setPostsPerPage={setPostsPerPage} />
+            </Suspense>
 
         </>
     )

@@ -12,12 +12,13 @@ const baseUrl = 'https://api.yelp.com'
         }
     }
 
-export const fetchBusinesses = async ({ term, location, sortby = 'best_match' }
-    : { term: string, location: string, sortby: string }) => {
+export const fetchBusinesses = async ({ term, location, sortby = 'best_match' }:
+     { term: string, location: string, sortby: string }) => {
 
     const searchParams = `search?location=${location}&term=${term}&sort_by=${sortby}&limit=50`
     const response = await fetch(`${baseUrl}/v3/businesses/${searchParams}`, options)
-    return response.json()
+    const data = await response.json()
+    return data
 }
 
 
