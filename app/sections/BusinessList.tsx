@@ -15,8 +15,10 @@ export default async function BusinessList({ formState }: any) {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const [businessList, setBusinessList] = useState<any>()
 
+    const params = formState.data
+
+
     useEffect(() => {
-        const params = formState.data
         async function fetchData() {
             const response = await fetchBusinesses(params)
             setBusinessList(response)
@@ -30,7 +32,7 @@ export default async function BusinessList({ formState }: any) {
             fetchData()
         }
 
-    }, [formState.data])
+    }, [formState.data, params])
 
     const businesses = businessList?.businesses
 
