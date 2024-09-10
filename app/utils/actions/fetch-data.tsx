@@ -14,9 +14,7 @@ export const fetchBusinesses = async ({ term, location, sortby = 'best_match' }
 
     const searchParams = `search?location=${location}&term=${term}&sort_by=${sortby}&limit=50`
     const response = await fetch(`${baseUrl}/v3/businesses/${searchParams}`, options)
-    const data = await response.json()
-    console.log(data)
-    return data
+    return response.json()
 }
 
 
