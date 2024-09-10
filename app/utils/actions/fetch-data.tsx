@@ -2,12 +2,13 @@
 
 
 const apiKey = process.env.APIKEY
+
 const baseUrl = 'https://api.yelp.com'
     const options = {
         method: 'GET',
         headers: {
             accept: 'application/json',
-            Authorization: `Bearer ${apiKey}`
+            Authorization: `Bearer ${apiKey}`,
         }
     }
 
