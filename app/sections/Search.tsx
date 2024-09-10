@@ -6,6 +6,9 @@ import Input from "@components/Input";
 import BusinessList from '@sections/BusinessList';
 import Image from 'next/image';
 
+import Loading from '@app/loading'
+import { Suspense } from "react";
+
 
 const filters = [
     {
@@ -23,7 +26,7 @@ const filters = [
 
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default function Search({ formState, formAction, modal, setModal }: any ) {
+export default function Search({ formState, formAction, modal, setModal }: any) {
 
 
     const handleSort = (e: React.MouseEvent<HTMLElement>) => {
@@ -51,7 +54,7 @@ export default function Search({ formState, formAction, modal, setModal }: any )
                     <p className='m-6 text-black'>Please fill out all the fields.</p>
                 </div>
             </div>
-            <div className="bg-cyan-700 z-10 relative md:h-[30vh] flex flex-col justify-center">
+            <div className="bg-cyan-900 z-10 relative md:h-[30vh] flex flex-col justify-center">
                 <Image className='background-image'
                     fill
                     src={'/search-background.webp'} alt={'Ravenous background image'}
@@ -79,7 +82,9 @@ export default function Search({ formState, formAction, modal, setModal }: any )
                     </div>
                 </form>
             </div>
-            <BusinessList formState={formState} />
+            <Suspense fallback={<Loading />} >
+                <BusinessList formState={formState} />
+            </Suspense>
         </>
     )
 }

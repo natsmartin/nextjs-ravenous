@@ -1,10 +1,6 @@
 'use server'
 
-
-export const fetchBusinesses = async ({ term, location, sortby = 'best_match' }
-    : { term: string, location: string, sortby: string }) => {
-
-    const baseUrl = 'https://api.yelp.com'
+const baseUrl = 'https://api.yelp.com'
     const options = {
         method: 'GET',
         headers: {
@@ -13,9 +9,13 @@ export const fetchBusinesses = async ({ term, location, sortby = 'best_match' }
         }
     }
 
+export const fetchBusinesses = async ({ term, location, sortby = 'best_match' }
+    : { term: string, location: string, sortby: string }) => {
+
     const searchParams = `search?location=${location}&term=${term}&sort_by=${sortby}&limit=50`
     const response = await fetch(`${baseUrl}/v3/businesses/${searchParams}`, options)
     const data = await response.json()
+    console.log(data)
     return data
 }
 

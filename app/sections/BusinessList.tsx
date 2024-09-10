@@ -1,15 +1,14 @@
 
 import { useState, useEffect } from 'react'
-// import BusinessCard from '@sections/Business'
+import BusinessCard from '@sections/Business'
 import Pagination from '@sections/Pagination'
-import dynamic from 'next/dynamic'
-import Loading from '@app/loading'
+// import dynamic from 'next/dynamic'
+// import Loading from '@app/loading'
 import { fetchBusinesses } from '@app/utils/actions/fetch-data'
-const BusinessCard = dynamic(() => import('@sections/Business'),
-    { loading: () => <Loading /> })
+// const BusinessCard = dynamic(() => import('@sections/Business'),
+//     { loading: () => <Loading /> })
 
 
-    
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default async function BusinessList({ formState }: any) {
 
@@ -23,7 +22,11 @@ export default async function BusinessList({ formState }: any) {
             setBusinessList(response)
         }
 
-        if (Object.values(params)) {
+        const objValues = Object.values(params)
+        const isNull = objValues.map(value =>
+            value ? false : true).includes(true)
+
+        if (objValues.length && !isNull) {
             fetchData()
         }
 
@@ -44,14 +47,19 @@ export default async function BusinessList({ formState }: any) {
     const currentPosts = businesses?.slice(firstPostIndex, lastPostIndex)
 
     return (
-        <>
-            <div className='text-black flex flex-wrap justify-center my-4'>
+        <>{businesses ?
+            <div className='text-black flex flex-wrap justify-center my-4`'>
                 {
                     // eslint-disable-next-line @typescript-eslint/no-explicit-any
                     currentPosts?.map((business: any, index: number) =>
                         <BusinessCard key={index} business={business} />)
                 }
             </div>
+            :
+            <p className={`${businesses ? 'block' : 'hidden'} 
+            bg-white text-center text-xs p-2 md:text-base text-red-500`}
+            >{businessList?.error.description}</p>
+        }
             <Pagination
                 totalPosts={businesses?.length}
                 postsPerPage={postsPerPage}
