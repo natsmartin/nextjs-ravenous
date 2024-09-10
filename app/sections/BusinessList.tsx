@@ -4,7 +4,7 @@ import BusinessCard from '@sections/Business'
 import Pagination from '@sections/Pagination'
 // import dynamic from 'next/dynamic'
 // import Loading from '@app/loading'
-import { fetchBusinesses } from '@app/utils/actions/fetch-data'
+import { fetchBusinesses } from '@utils/actions/fetch-data'
 // const BusinessCard = dynamic(() => import('@sections/Business'),
 //     { loading: () => <Loading /> })
 
