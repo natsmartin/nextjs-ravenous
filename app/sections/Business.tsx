@@ -24,7 +24,7 @@ interface BusinessProps {
 
 export default function Business({ business }: { business: BusinessProps }) {
     return (
-        <div className='flex flex-col justify-center rounded-xl shadow-gray-900 shadow-lg p-2 m-4 bg-cyan-700 card-clamp'>
+        <div className='flex flex-col flex-wrap self-center justify-center rounded-xl shadow-gray-900 shadow-lg p-2 m-4 bg-cyan-700 card-clamp'>
             <div className='flex justify-center'>
                 <Image
                     src={business.image_url}
