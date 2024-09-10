@@ -1,19 +1,20 @@
 
-import { useState, useEffect } from 'react'
+
+
+import { useEffect } from 'react'
 import BusinessCard from '@sections/Business'
 import Pagination from '@sections/Pagination'
-// import dynamic from 'next/dynamic'
-// import Loading from '@app/loading'
 import { fetchBusinesses } from '@utils/actions/fetch-data'
-// const BusinessCard = dynamic(() => import('@sections/Business'),
-//     { loading: () => <Loading /> })
 
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default async function BusinessList({ formState }: any) {
 
+
+export default async function BusinessList({
+    formState, businessList, setBusinessList,
+    currentPage, setCurrentPage, 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const [businessList, setBusinessList] = useState<any>()
+    postsPerPage, setPostsPerPage }: any) {
+
 
     const params = formState.data
 
@@ -32,16 +33,15 @@ export default async function BusinessList({ formState }: any) {
             fetchData()
         }
 
-    }, [formState.data, params])
+    }, [formState.data, params, setBusinessList])
 
     const businesses = businessList?.businesses
 
-    const [currentPage, setCurrentPage] = useState(1)
-    const [postsPerPage, setPostsPerPage] = useState(0)
+
 
     useEffect(() => {
         setPostsPerPage(10)
-    }, [businessList])
+    }, [businessList, setPostsPerPage])
 
 
     const lastPostIndex = currentPage * postsPerPage

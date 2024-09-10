@@ -9,6 +9,10 @@ import Image from 'next/image';
 import Loading from '@app/loading'
 import { Suspense } from "react";
 
+import { useFormState } from "react-dom";
+import { useState } from "react";
+import { handleSubmit } from "@utils/actions/fetch-data";
+
 
 const filters = [
     {
@@ -26,7 +30,17 @@ const filters = [
 
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default function Search({ formState, formAction, modal, setModal }: any) {
+export default function Search() {
+
+
+    const [formState, formAction] = useFormState(handleSubmit, { data: '' })
+    const [modal, setModal] = useState('hidden')
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const [businessList, setBusinessList] = useState<any>()
+
+    const [currentPage, setCurrentPage] = useState(1)
+    const [postsPerPage, setPostsPerPage] = useState(0)
 
 
     const handleSort = (e: React.MouseEvent<HTMLElement>) => {
@@ -83,7 +97,13 @@ export default function Search({ formState, formAction, modal, setModal }: any) 
                 </form>
             </div>
             <Suspense fallback={<Loading />} >
-                <BusinessList formState={formState} />
+                <BusinessList formState={formState}
+                    businessList={businessList}
+                    setBusinessList={setBusinessList}
+                    currentPage={currentPage}
+                    setCurrentPage={setCurrentPage}
+                    postsPerPage={postsPerPage}
+                    setPostsPerPage={setPostsPerPage} />
             </Suspense>
         </>
     )
