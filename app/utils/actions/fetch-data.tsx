@@ -1,7 +1,7 @@
 'use server'
 
 
-const apiKey = process.env.API_KEY
+const apiKey = process.env.APIKEY
 const baseUrl = 'https://api.yelp.com'
     const options = {
         method: 'GET',
