@@ -42,6 +42,10 @@ body {
   height: auto;
 }
 
+.filterbar {
+  width: -webkit-fill-available;
+}
+
 .positive {
   color: green;
 }

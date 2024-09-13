@@ -71,8 +71,8 @@ export default function Search() {
                     fill
                     src={'/search-background.webp'} alt={'Ravenous background image'}
                     priority={true} />
-                <form action={formAction} >
-                    <div className="flex justify-center py-2 bg-[#000000b0]">
+                <form action={formAction} className="flex flex-col justify-center items-center">
+                    <div className="flex justify-center py-2 bg-[#00000069] filterbar backdrop-blur-sm">
                         {
                             filters.map(filter =>
                                 <Button key={filter.value} label={filter.label} onClick={handleSort}
@@ -81,13 +81,13 @@ export default function Search() {
                         }
                     </div>
                     <input id='hidden-input-sort' className='hidden' defaultValue={'best_match'} name='sortby' ></input>
-                    <div className="flex flex-col justify-center items-center md:flex md:flex-row">
+                    <div className="flex flex-col justify-center items-center md:flex md:flex-row w-auto md:w-[950px]">
                         <Input id="term-input" placeholder="What food craves you?" name="term" />
                         <Input id="location-input" placeholder="Where?" name="location" />
                     </div>
                     <div className="flex justify-center m-2">
                         <button type="submit" className="rounded-xl bg-cyan-700 text-xs text-white font-semibold md:font-bold px-8 py-2 
-                        shadow-gray-900 shadow-lg md:text-base hover:scale-105 hover:bg-cyan-600 button-clamp"
+                        shadow-gray-900 shadow-lg md:text-base hover:scale-105 hover:bg-cyan-600 w-auto md:w-[100px] md:h-auto button-clamp"
                             onClick={handleSearch}>
                             Let&apos;s Go
                         </button>
