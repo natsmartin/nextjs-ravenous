@@ -66,7 +66,7 @@ export default function Search() {
                     <p className='m-6 text-black'>Please fill out all the fields.</p>
                 </div>
             </div>
-            <div className="bg-cyan-900 z-10 relative md:h-[30vh] flex flex-col justify-center">
+            <div className="bg-cyan-900 z-10 relative flex flex-col justify-center">
                 <Image className='background-image'
                     fill
                     src={'/search-background.webp'} alt={'Ravenous background image'}
