@@ -1,7 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
 
-interface BusinessProps {
+export interface BusinessProps {
     categories: [{ alias: string, title: string }],
     display_phone: string,
     id: string,

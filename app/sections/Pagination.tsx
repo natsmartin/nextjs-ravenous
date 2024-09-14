@@ -1,13 +1,10 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { BusinessContext } from '@app/utils/Context'
 
-interface PaginationProps {
-    totalPosts: number,
-    postsPerPage: number,
-    setCurrentPage: React.Dispatch<React.SetStateAction<number>>,
-    currentPage: number
-}
 
-export default function Pagination({ totalPosts, postsPerPage, setCurrentPage, currentPage }: PaginationProps) {
+export default function Pagination({ totalPosts }: { totalPosts: number}) {
+
+    const { postsPerPage, currentPage, setCurrentPage } = useContext(BusinessContext);
 
     const pages = []
 

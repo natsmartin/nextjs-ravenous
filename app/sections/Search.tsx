@@ -11,6 +11,8 @@ import Loading from '@app/loading'
 import { useFormState } from "react-dom";
 import { Suspense, useState } from "react";
 import { handleSubmit } from "@utils/actions/fetch-data";
+import { BusinessContext } from "@app/utils/Context";
+import { BusinessProps } from '@sections/Business'
 
 
 const filters = [
@@ -27,15 +29,18 @@ const filters = [
         value: 'review_count'
     }]
 
+interface BusinessesProps {
+    businesses: BusinessProps | never[]
+}
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+
 export default function Search() {
 
 
     const [formState, formAction] = useFormState(handleSubmit, { data: '' })
     const [modal, setModal] = useState('hidden')
 
-    const [businessList, setBusinessList] = useState({ businesses: [] })
+    const [businessList, setBusinessList] = useState<BusinessesProps>({ businesses: [] })
 
     const [currentPage, setCurrentPage] = useState(1)
     const [postsPerPage, setPostsPerPage] = useState(0)
@@ -95,13 +100,18 @@ export default function Search() {
                 </form>
             </div>
             <Suspense fallback={<Loading />}>
-                <BusinessList formState={formState}
-                    businessList={businessList}
-                    setBusinessList={setBusinessList}
-                    currentPage={currentPage}
-                    setCurrentPage={setCurrentPage}
-                    postsPerPage={postsPerPage}
-                    setPostsPerPage={setPostsPerPage} />
+                <BusinessContext.Provider value={
+                    {
+                        formState,
+                        businessList,
+                        setBusinessList,
+                        currentPage,
+                        setCurrentPage,
+                        postsPerPage,
+                        setPostsPerPage
+                    }} >
+                    <BusinessList/>
+                </BusinessContext.Provider>
             </Suspense>
 
         </>

@@ -1,20 +1,24 @@
 
 
 
-import { useEffect } from 'react'
+import { useEffect, useContext } from 'react'
 import BusinessCard from '@sections/Business'
 import Pagination from '@sections/Pagination'
 import { fetchBusinesses } from '@utils/actions/fetch-data'
+import { BusinessContext } from '@app/utils/Context'
+import { BusinessProps } from '@sections/Business'
 
 
 
+export default async function BusinessList() {
 
-export default async function BusinessList({
-    formState, businessList, setBusinessList,
-    currentPage, setCurrentPage,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    postsPerPage, setPostsPerPage }: any) {
-
+    const { 
+        formState,
+        businessList,
+        setBusinessList,
+        currentPage,
+        postsPerPage,
+        setPostsPerPage } = useContext(BusinessContext);
 
     useEffect(() => {
         const params = formState.data
@@ -47,11 +51,11 @@ export default async function BusinessList({
     const currentPosts = businesses?.slice(firstPostIndex, lastPostIndex)
 
     return (
-        <>{businesses ?
+        <>
+        {businesses ?
             <div className='text-black flex flex-wrap justify-center my-4`'>
                 {
-                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                    currentPosts?.map((business: any, index: number) =>
+                    currentPosts?.map((business: BusinessProps, index: number) =>
                         <BusinessCard key={index} business={business} />)
                 }
             </div>
@@ -60,12 +64,7 @@ export default async function BusinessList({
             bg-white text-center text-xs p-2 md:text-base text-red-500`}
             >{businessList?.error.description}</p>
         }
-            <Pagination
-                totalPosts={businesses?.length}
-                postsPerPage={postsPerPage}
-                setCurrentPage={setCurrentPage}
-                currentPage={currentPage}
-            />
+            <Pagination totalPosts={businesses?.length} />
         </>
     )
 }
