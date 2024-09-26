@@ -38,7 +38,7 @@ export default async function BusinessList() {
     }, [formState.data, setBusinessList])
 
     const businesses = businessList?.businesses
-
+    console.log(businesses)
 
 
     useEffect(() => {
@@ -60,8 +60,7 @@ export default async function BusinessList() {
                 }
             </div>
             :
-            <p className={`${businesses ? 'block' : 'hidden'} 
-            bg-white text-center text-xs p-2 md:text-base text-red-500`}
+            <p className='bg-white text-center text-xs p-2 md:text-base text-red-500'
             >{businessList?.error.description}</p>
         }
             <Pagination totalPosts={businesses?.length} />
