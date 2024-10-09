@@ -11,7 +11,7 @@ export default function Home() {
   
 
   return (
-    <div className="md:flex md:flex-col justify-center text-white w-auto md:w-[fit-content]">
+    <div className="md:flex md:flex-col justify-center text-white w-auto md:w-[auto]">
       <Header />
       <main className="h-full">
         <Search />
