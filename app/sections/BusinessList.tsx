@@ -38,7 +38,7 @@ export default async function BusinessList() {
     }, [formState.data, setBusinessList])
 
     const businesses = businessList?.businesses
-    console.log(businesses)
+    // console.log(businesses)
 
 
     useEffect(() => {
