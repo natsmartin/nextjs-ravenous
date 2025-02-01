@@ -29,7 +29,7 @@ export default function BusinessList() {
 
         const objValues = Object.values(params)
         const isNull = objValues.map(value =>
-            value ? false : true).includes(true)
+            value ?? true).includes(true)
 
         if (objValues.length && !isNull) {
             fetchData()
