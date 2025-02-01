@@ -10,7 +10,7 @@ import { BusinessProps } from '@sections/Business'
 
 
 
-export default async function BusinessList() {
+export default function BusinessList() {
 
     const { 
         formState,
@@ -49,7 +49,7 @@ export default async function BusinessList() {
     const lastPostIndex = currentPage * postsPerPage
     const firstPostIndex = lastPostIndex - postsPerPage
     const currentPosts = businesses?.slice(firstPostIndex, lastPostIndex)
-
+    // console.log(currentPosts)
     return (
         <>
         {businesses ?
