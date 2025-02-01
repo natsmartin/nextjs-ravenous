@@ -10,7 +10,7 @@ import { BusinessProps } from '@sections/Business'
 
 
 
-export default function BusinessList() {
+export default async function BusinessList() {
 
     const { 
         formState,
