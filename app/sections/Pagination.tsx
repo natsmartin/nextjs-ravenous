@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { BusinessContext } from '@app/utils/Context'
 
 
-export default function Pagination({ totalPosts }: { totalPosts: number}) {
+export default function Pagination({ totalPosts }: { totalPosts: number}): React.JSX.Element {
 
     const { postsPerPage, currentPage, setCurrentPage } = useContext(BusinessContext);
 

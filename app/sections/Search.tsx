@@ -34,7 +34,7 @@ interface BusinessesProps {
 }
 
 
-export default function Search() {
+export default function Search(): React.JSX.Element {
 
 
     const [formState, formAction] = useFormState(handleSubmit, { data: '' })

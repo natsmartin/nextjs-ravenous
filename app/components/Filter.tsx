@@ -6,7 +6,7 @@ interface FilterProps {
     onClick?: (e: React.MouseEvent<HTMLElement>) => void
 }
 
-export default function Filter({ label, value, onClick }: FilterProps) {
+export default function Filter({ label, value, onClick }: FilterProps): React.JSX.Element {
     return (
         <button onClick={onClick} value={value}
             className="mx-4 border-b-2 border-b-white text-clamp

@@ -6,7 +6,7 @@ import Footer from "@components/Footer";
 import Search from "@sections/Search";
 
 
-export default function Home() {
+export default function Home(): React.JSX.Element {
 
   
 

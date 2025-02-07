@@ -10,7 +10,7 @@ import { BusinessProps } from '@sections/Business'
 
 
 
-export default async function BusinessList() {
+export default async function BusinessList(): Promise<React.JSX.Element> {
 
     const { 
         formState,

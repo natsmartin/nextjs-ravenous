@@ -22,7 +22,7 @@ export interface BusinessProps {
     url: string
 }
 
-export default function Business({ business }: { business: BusinessProps }) {
+export default function Business({ business }: { business: BusinessProps }): React.JSX.Element {
     return (
         <div className='flex flex-col flex-wrap self-center justify-center rounded-xl shadow-gray-900 shadow-lg p-2 m-4 bg-cyan-700 w-min md:w-auto md:card-clamp'>
             <div className='flex justify-center'>
