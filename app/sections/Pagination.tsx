@@ -15,7 +15,7 @@ export default function Pagination({ totalPosts }: { totalPosts: number}): React
     return (
         <div className='flex flex-nowrap justify-center items-center text-black font-bold'>
             {
-                pages.map((page, index) =>
+                pages?.map((page, index) =>
                     <button key={index} onClick={() => setCurrentPage(page)}
                         className={`${page === currentPage ? 'active' : ''} 
                         border border-white text-white bg-amber-500 rounded-md 
