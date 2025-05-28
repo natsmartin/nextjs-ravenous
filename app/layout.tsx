@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { roboto } from "./fonts/fonts";
 import { Analytics } from "@vercel/analytics/react"
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 export const metadata: Metadata = {
   title: "Ravenous App",
@@ -20,6 +21,7 @@ export default function RootLayout({
       >
         {children}
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
