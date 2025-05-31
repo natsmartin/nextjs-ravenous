@@ -73,7 +73,7 @@ export default function Business({
           </p>
           <p className="text-[9px] md:text-base">{business.location.city}</p>
           <p className="text-[9px] md:text-base">
-            {business.location.state + " " + business.location.zip_code}
+            {business.location.state}
           </p>
         </div>
         <div className="font-bold text-yellow-500 text-right mb-auto">
