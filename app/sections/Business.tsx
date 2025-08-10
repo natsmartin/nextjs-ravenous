@@ -32,13 +32,13 @@ export default function Business({
 
   return (
     <div className="flex flex-col flex-wrap self-center justify-center rounded-xl
-   [&_div]:m-1 shadow-gray-900 shadow-lg p-2 m-4 bg-cyan-700 card-clamp">
+    shadow-gray-900 shadow-lg p-2 m-4 bg-cyan-700 card-clamp">
       <Image
         className="business-image"
         src={business.image_url}
         alt={business.name}
-        width={250}
-        height={250}
+        width={100}
+        height={100}
         priority={true}
       />
       <div className="flex justify-center">
@@ -46,7 +46,7 @@ export default function Business({
           {business.name}
         </p>
       </div>
-      <div className="text-white mb-4 text-clamp">
+      <div className="[&_div]:my-2 w-4/5 mx-auto text-white text-clamp">
         <div className="text-wrap">
           <p
             style={{
@@ -64,17 +64,17 @@ export default function Business({
             </span>
           </p>
         </div>
-        <div className="flex [&_*]:w-[50%] font-bold text-yellow-500 text-right">
+        <div className="flex mx-auto items-center [&_*]:w-1/2 font-bold text-yellow-500 text-right">
           <p
             className={`${
               Number(business.rating) >= 3 ? "positive" : "negative"
             } 
-                    bg-white rounded-sm text-[10px] md:text-base text-center`}
+                    bg-white rounded-sm text-[10px] md:text-sm text-center`}
           >
             {business.rating + "⭐"}
           </p>
 
-          <p className="text-[9px] md:text-base">
+          <p className="text-[9px] md:text-sm">
             {business.review_count + " reviews"}
           </p>
         </div>

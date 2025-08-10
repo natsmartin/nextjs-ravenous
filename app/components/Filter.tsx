@@ -9,7 +9,7 @@ interface FilterProps {
 export default function Filter({ label, value, onClick }: FilterProps): React.JSX.Element {
     return (
         <button onClick={onClick} value={value}
-            className="mx-4 border-b-2 border-b-white text-clamp
+            className="mx-4 border-b-2 border-b-white text-clamp active:text-amber-400 active:border-b-amber-400
             hover:border-b-amber-400 hover:text-amber-400 focus:border-b-amber-400 focus:text-amber-400"
         >{label}
         </button>

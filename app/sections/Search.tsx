@@ -4,11 +4,13 @@ import Button from "@components/Filter";
 import Input from "@components/Input";
 import BusinessList from "@sections/BusinessList";
 import Image from "next/image";
-import Loading from "@app/loading";
-
 import { useFormState } from "react-dom";
-import { Suspense, useState } from "react";
-import { handleSubmit } from "@utils/actions/fetch-data";
+import { useEffect, useRef, useState } from "react";
+import {
+  fetchBusinesses,
+  FormState,
+  handleSubmit,
+} from "@utils/actions/fetch-data";
 import { BusinessContext } from "@app/utils/Context";
 import { BusinessProps } from "@sections/Business";
 
@@ -27,19 +29,32 @@ const filters = [
   },
 ];
 
-interface BusinessesProps {
-  businesses: BusinessProps | never[];
+export interface BusinessesProps {
+  error?: { description?: "" };
+  businesses: BusinessProps[];
+}
+
+const initialState: FormState = {
+  data: {
+    term: null,
+    location: null,
+    sortby: null,
+  },
+};
+
+interface Error {
+  description?: string;
 }
 
 export default function Search(): React.JSX.Element {
-  const [formState, formAction] = useFormState(handleSubmit, { data: "" });
+  const [formState, formAction] = useFormState(handleSubmit, initialState);
   const [modal, setModal] = useState("hidden");
 
-  const [businessList, setBusinessList] = useState<BusinessesProps>({
-    businesses: [],
-  });
+  const [businessList, setBusinessList] = useState<BusinessProps[]>([]);
 
-  const [error, setError] = useState();
+  const [error, setError] = useState<Error | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const initialLoadRef = useRef(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage, setPostsPerPage] = useState(0);
 
@@ -48,6 +63,32 @@ export default function Search(): React.JSX.Element {
     term: "",
     location: "",
   });
+
+  const params = formState.data;
+
+  useEffect(() => {
+    if (!initialLoadRef.current) {
+      setIsLoading(true);
+    }
+
+    const fetchData = async () => {
+      try {
+        const response = await fetchBusinesses(params);
+        setBusinessList(response.businesses);
+      } catch (err) {
+        setError(err as Error);
+      } finally {
+        setIsLoading(false);
+        initialLoadRef.current = false;
+      }
+    };
+    const objValues = Object.values(params);
+    const isNull = objValues.map((value) => value ?? true).includes(true);
+
+    if (objValues.length && !isNull) {
+      fetchData();
+    }
+  }, [params]);
 
   const handleSort = (e: React.MouseEvent) => {
     const { value } = e.target as HTMLInputElement;
@@ -143,20 +184,16 @@ export default function Search(): React.JSX.Element {
       </div>
       <BusinessContext.Provider
         value={{
-          formState,
           businessList,
-          setBusinessList,
           error,
-          setError,
+          isLoading,
           currentPage,
           setCurrentPage,
           postsPerPage,
           setPostsPerPage,
         }}
       >
-        <Suspense fallback={<Loading />}>
-          <BusinessList />
-        </Suspense>
+        <BusinessList businesses={businessList} />
       </BusinessContext.Provider>
     </>
   );

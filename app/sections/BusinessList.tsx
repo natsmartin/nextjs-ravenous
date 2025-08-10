@@ -1,69 +1,60 @@
 import { useEffect, useContext } from "react";
 import BusinessCard from "@sections/Business";
 import Pagination from "@sections/Pagination";
-import { fetchBusinesses } from "@utils/actions/fetch-data";
 import { BusinessContext } from "@app/utils/Context";
 import { BusinessProps } from "@sections/Business";
+import Loading from "@app/loading";
 
-export default function BusinessList(): React.JSX.Element {
+export default function BusinessList({
+  businesses,
+}: {
+  businesses: BusinessProps[];
+}): React.JSX.Element {
   const {
-    formState,
     businessList,
-    setBusinessList,
-    error,
-    setError,
+    isLoading,
     currentPage,
     postsPerPage,
     setPostsPerPage,
   } = useContext(BusinessContext);
 
-  const params = formState.data;
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetchBusinesses(params);
-        setBusinessList(response);
-      } catch (err) {
-        setError(err);
-      }
-    };
-
-    const objValues = Object.values(params);
-    const isNull = objValues.map((value) => value ?? true).includes(true);
-
-    if (objValues.length && !isNull) {
-      fetchData();
-    }
-  }, [params, setBusinessList, setError]);
-
-  const businesses = businessList?.businesses;
 
   useEffect(() => {
     setPostsPerPage(10);
-  }, [businessList, setPostsPerPage]);
+  }, [businesses, setPostsPerPage]);
 
   const lastPostIndex = currentPage * postsPerPage;
   const firstPostIndex = lastPostIndex - postsPerPage;
   const currentPosts = businesses?.slice(firstPostIndex, lastPostIndex);
 
-  if (businessList?.error || error) {
+  if (businessList.error) {
     return (
       <p className="bg-white text-center text-xs p-2 md:text-base text-red-500">
-        {businessList?.error.description || error}
+        {businessList.error?.description}
       </p>
     );
   }
 
+  if (isLoading) {
+    return <Loading />;
+  }
+
   return (
     <>
-      <div className="text-black flex flex-wrap justify-center my-4`">
-        {currentPosts?.map((business: BusinessProps, index: number) => (
-          <BusinessCard key={index} business={business} />
-        ))}
-      </div>
-
-      <Pagination totalPosts={businesses?.length} />
+      {businesses.length || businessList.total !== 0 ? (
+        <>
+          <div className="text-black flex flex-wrap justify-center my-4`">
+            {currentPosts?.map((business: BusinessProps, index: number) => (
+              <BusinessCard key={index} business={business} />
+            ))}
+          </div>
+          <Pagination totalPosts={businesses.length} />
+        </>
+      ) : (
+        <p className="bg-white text-black text-center text-xs p-2 md:text-base">
+          No results found.
+        </p>
+      )}
     </>
   );
 }
