@@ -71,7 +71,7 @@ export default function Business({
             } 
                     bg-white rounded-sm text-[10px] md:text-sm text-center`}
           >
-            {business.rating + "⭐"}
+            {"⭐" + business.rating}
           </p>
 
           <p className="text-[9px] md:text-sm">
